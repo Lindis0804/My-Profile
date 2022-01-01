@@ -42,6 +42,6 @@ public class Profile extends AppCompatActivity {
         menu.findItem(R.id.inf_website).setTitle(intent.getStringExtra("website"));
         menu.findItem(R.id.inf_company_name).setTitle("Name: "+intent.getStringExtra("company_name"));
         menu.findItem(R.id.inf_company_catchPhrase).setTitle("Catch phrase: "+intent.getStringExtra("company_catchPhrase"));
-        menu.findItem(R.id.inf_company_bs).setTitle("Bs :"+intent.getStringExtra("company_bs"));
+        menu.findItem(R.id.inf_company_bs).setTitle("Bs: "+intent.getStringExtra("company_bs"));
     }
 }
