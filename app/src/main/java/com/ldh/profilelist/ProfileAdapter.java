@@ -29,8 +29,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ItemView
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
          Person person = persons.get(position);
-         holder.textView_stt.setText(person.getId()+"");
+       //  holder.textView_stt.setText(person.getId()+"");
          holder.imageView_avatar.setImageResource(person.getAvatar());
+         holder.imageView_avatar.setClipToOutline(true);
          holder.textView_name.setText(person.getName());
          holder.textView_gmail.setText(person.getEmail());
     }
@@ -46,7 +47,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ItemView
         private ProfileClickListener _profileClickListener;
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView_stt = itemView.findViewById(R.id.textView_stt);
+           // textView_stt = itemView.findViewById(R.id.textView_stt);
             textView_gmail = itemView.findViewById(R.id.textView_gmail);
             textView_name = itemView.findViewById(R.id.textView_name);
             imageView_avatar = itemView.findViewById(R.id.imageView_avatar);

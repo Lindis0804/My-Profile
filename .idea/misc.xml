@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/drawable/custom_avatar.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/drawable/custom_avatar_list.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/drawable/custom_layout.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/drawable/custom_profile_item.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/layout/activity_main.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/layout/activity_profile.xml" value="0.21" />
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/layout/custom_item.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/layout/layout_profile_item.xml" value="0.33" />
+        <entry key="..\:/Users/use/Desktop/My-Profile/app/src/main/res/menu/information.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/use/Pictures/ProfileList/app/src/main/res/drawable/custom_avatar.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/use/Pictures/ProfileList/app/src/main/res/drawable/custom_layout.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/use/Pictures/ProfileList/app/src/main/res/layout/activity_main.xml" value="0.1015625" />

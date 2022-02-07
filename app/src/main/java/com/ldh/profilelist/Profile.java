@@ -29,7 +29,7 @@ public class Profile extends AppCompatActivity {
         username.setText(intent.getStringExtra("username")+"");
         int img = intent.getIntExtra("avatar",0);
         avatar.setImageResource(img);
-        Log.v("TAG",intent.getIntExtra("avatar",0)+"");
+        avatar.setClipToOutline(true);
         navigationView = findViewById(R.id.navigationView);
         Menu menu = navigationView.getMenu();
         String email = intent.getStringExtra("email")+"";

@@ -12,8 +12,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView_profile_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent" />
+<!--        app:layout_constraintBottom_toTopOf="@+id/button"-->
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +23,8 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#00ffff"
+        android:backgroundTint="#E74C3C"
+        android:background = "@drawable/custom_profile_item"
         android:text="Show list!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

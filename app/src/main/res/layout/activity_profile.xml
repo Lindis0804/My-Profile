@@ -46,11 +46,13 @@
         android:layout_height="100dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="0dp"
+        android:scaleType="centerCrop"
         android:background="@drawable/custom_avatar"
+        android:clipToOutline="true"
         android:src="@drawable/heimerdinger"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/g1"
-        app:layout_constraintBottom_toTopOf="@id/navigationView"/>
+        />
 
     <TextView
         android:id="@+id/txtView_username"

@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -24,16 +26,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  implements ProfileClickListener{
+public class MainActivity extends AppCompatActivity implements ProfileClickListener {
     private List<Person> persons = new ArrayList<>();
     private RecyclerView recyclerView;
     String str;
     JSONArray jArr;
     List<Integer> imgList;
+    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        button  = findViewById(R.id.button);
         imgList = new ArrayList<>();
         imgList.add(new Integer(R.drawable.anh_1));
         imgList.add(new Integer(R.drawable.anh_2));
@@ -47,77 +51,81 @@ public class MainActivity extends AppCompatActivity  implements ProfileClickList
         imgList.add(new Integer(R.drawable.anh_10));
 
         new ReadJSONObject().execute("https://lebavui.github.io/jsons/users.json");
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 findViewById(R.id.main_constraintLayout).setBackgroundResource(R.drawable.custom_layout);
                 try {
-             jArr = new JSONArray(str);
-            for (int i=0;i<jArr.length();i++)
-            {
-                JSONObject j = jArr.getJSONObject(i);
-                int id = j.getInt("id");
-                String name = j.getString("name");
-                String username = j.getString("username");
-                String email = j.getString("email");
-                int avatar = imgList.get(i).intValue();
-                JSONObject address = j.getJSONObject("address");
-                String address_street = address.getString("street");
-                String address_suite = address.getString("suite");
-                String address_city = address.getString("city");
-                String address_zipcode = address.getString("zipcode");
-                JSONObject geo = address.getJSONObject("geo");
-                String address_geo_lat = geo.getString("lat");
-                String address_geo_lng = geo.getString("lng");
-                String phone = j.getString("phone");
-                String website = j.getString("website");
-                JSONObject company = j.getJSONObject("company");
-                String company_name = company.getString("name");
-                String company_catchPhrase = company.getString("catchPhrase");
-                String company_bs = company.getString("bs");
-                persons.add(new Person(id,
-                        avatar,
-                        name,
-                        username,
-                        email,
-                        address_street,
-                        address_suite,
-                        address_city,
-                        address_zipcode,
-                        address_geo_lat,
-                        address_geo_lng,
-                        phone,
-                        website,
-                        company_name,
-                        company_catchPhrase,
-                        company_bs));
-                               Log.v("TAG",id+" "+name+" "+email+" "+company_name+" "+company_catchPhrase);
-                recyclerView = findViewById(R.id.recycleView_profile_list);
-                recyclerView.setHasFixedSize(true);
-                ProfileAdapter adapter = new ProfileAdapter(persons,
-                        MainActivity.this);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(
-                        MainActivity.this,
-                        LinearLayoutManager.VERTICAL,
-                        false
-                );
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                    jArr = new JSONArray(str);
+                    for (int i = 0; i < jArr.length(); i++) {
+                        JSONObject j = jArr.getJSONObject(i);
+                        int id = j.getInt("id");
+                        String name = j.getString("name");
+                        String username = j.getString("username");
+                        String email = j.getString("email");
+                        int avatar = imgList.get(i).intValue();
+                        JSONObject address = j.getJSONObject("address");
+                        String address_street = address.getString("street");
+                        String address_suite = address.getString("suite");
+                        String address_city = address.getString("city");
+                        String address_zipcode = address.getString("zipcode");
+                        JSONObject geo = address.getJSONObject("geo");
+                        String address_geo_lat = geo.getString("lat");
+                        String address_geo_lng = geo.getString("lng");
+                        String phone = j.getString("phone");
+                        String website = j.getString("website");
+                        JSONObject company = j.getJSONObject("company");
+                        String company_name = company.getString("name");
+                        String company_catchPhrase = company.getString("catchPhrase");
+                        String company_bs = company.getString("bs");
+                        persons.add(new Person(id,
+                                avatar,
+                                name,
+                                username,
+                                email,
+                                address_street,
+                                address_suite,
+                                address_city,
+                                address_zipcode,
+                                address_geo_lat,
+                                address_geo_lng,
+                                phone,
+                                website,
+                                company_name,
+                                company_catchPhrase,
+                                company_bs));
+                        Log.v("TAG", id + " " + name + " " + email + " " + company_name + " " + company_catchPhrase);
+                        recyclerView = findViewById(R.id.recycleView_profile_list);
+                        recyclerView.setHasFixedSize(true);
+                        ProfileAdapter adapter = new ProfileAdapter(persons,
+                                MainActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(
+                                MainActivity.this,
+                                LinearLayoutManager.VERTICAL,
+                                false
+                        );
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setAdapter(adapter);
+
+
+                        // xóa sự xuất hiện của nut
+                        button.setVisibility(View.GONE);
+
+                     //   recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
-      //====================================================================================================================
+        //====================================================================================================================
 
 
     }
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getApplicationContext(),persons.get(position).getName()+" profile is clicked",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), persons.get(position).getName() + " profile is clicked", Toast.LENGTH_SHORT).show();
 
 
         String name = persons.get(position).getName();
@@ -142,11 +150,11 @@ public class MainActivity extends AppCompatActivity  implements ProfileClickList
         String company_catchPhrase = persons.get(position).getCompany_catchPhrase();
         String company_bs = persons.get(position).getCompany_bs();
 
-        Log.v("TAG","email "+email);
-        openProfile(name,username,email,avatar,address_street,address_suite,address_city,address_zipcode,address_geo_lat,address_geo_lng,phone,website,company_name,company_catchPhrase,company_bs);
+        Log.v("TAG", "email " + email);
+        openProfile(name, username, email, avatar, address_street, address_suite, address_city, address_zipcode, address_geo_lat, address_geo_lng, phone, website, company_name, company_catchPhrase, company_bs);
     }
 
-    private class ReadJSONObject extends AsyncTask<String, Void, String>{
+    private class ReadJSONObject extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
@@ -156,7 +164,7 @@ public class MainActivity extends AppCompatActivity  implements ProfileClickList
                 InputStreamReader inputStreamReader = new InputStreamReader(url.openConnection().getInputStream());
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String line = "";
-                while ((line = bufferedReader.readLine())!=null){
+                while ((line = bufferedReader.readLine()) != null) {
                     content.append(line);
                 }
                 bufferedReader.close();
@@ -175,6 +183,7 @@ public class MainActivity extends AppCompatActivity  implements ProfileClickList
             str = s;
         }
     }
+
     public void openProfile(String name,
                             String username,
                             String email,
@@ -189,24 +198,23 @@ public class MainActivity extends AppCompatActivity  implements ProfileClickList
                             String website,
                             String company_name,
                             String company_catchPhrase,
-                            String company_bs)
-    {
-        Intent intent = new Intent(this,Profile.class);
-        intent.putExtra("name",name);
-        intent.putExtra("username",username);
-        intent.putExtra("email",email);
-        intent.putExtra("avatar",avatar);
-        intent.putExtra("address_street",address_street);
-        intent.putExtra("address_suite",address_suite);
-        intent.putExtra("address_city",address_city);
-        intent.putExtra("address_zipcode",address_zipcode);
-        intent.putExtra("address_geo_lat",address_geo_lat);
-        intent.putExtra("address_geo_lng",address_geo_lng);
-        intent.putExtra("phone",phone);
-        intent.putExtra("website",website);
-        intent.putExtra("company_name",company_name);
-        intent.putExtra("company_catchPhrase",company_catchPhrase);
-        intent.putExtra("company_bs",company_bs);
+                            String company_bs) {
+        Intent intent = new Intent(this, Profile.class);
+        intent.putExtra("name", name);
+        intent.putExtra("username", username);
+        intent.putExtra("email", email);
+        intent.putExtra("avatar", avatar);
+        intent.putExtra("address_street", address_street);
+        intent.putExtra("address_suite", address_suite);
+        intent.putExtra("address_city", address_city);
+        intent.putExtra("address_zipcode", address_zipcode);
+        intent.putExtra("address_geo_lat", address_geo_lat);
+        intent.putExtra("address_geo_lng", address_geo_lng);
+        intent.putExtra("phone", phone);
+        intent.putExtra("website", website);
+        intent.putExtra("company_name", company_name);
+        intent.putExtra("company_catchPhrase", company_catchPhrase);
+        intent.putExtra("company_bs", company_bs);
         startActivity(intent);
     }
 
