@@ -1,13 +1,17 @@
 package com.ldh.profilelist;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +37,12 @@ public class MainActivity extends AppCompatActivity implements ProfileClickListe
     JSONArray jArr;
     List<Integer> imgList;
     private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button  = findViewById(R.id.button);
+        button = findViewById(R.id.button);
         imgList = new ArrayList<>();
         imgList.add(new Integer(R.drawable.anh_1));
         imgList.add(new Integer(R.drawable.anh_2));
@@ -51,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements ProfileClickListe
         imgList.add(new Integer(R.drawable.anh_10));
 
         new ReadJSONObject().execute("https://lebavui.github.io/jsons/users.json");
+
+
+        // lấy thông tin từ JSON và hiện ra recyclerview ======================================================
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,12 +114,13 @@ public class MainActivity extends AppCompatActivity implements ProfileClickListe
                         );
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.setAdapter(adapter);
-
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
                         // xóa sự xuất hiện của nut
                         button.setVisibility(View.GONE);
 
-                     //   recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        // thêm nhạc
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -119,9 +128,11 @@ public class MainActivity extends AppCompatActivity implements ProfileClickListe
             }
         });
         //====================================================================================================================
-
+        MediaPlayer song = MediaPlayer.create(MainActivity.this, R.raw.thousand_years);
+        song.start();
 
     }
+
 
     @Override
     public void onItemClick(int position) {
@@ -217,5 +228,6 @@ public class MainActivity extends AppCompatActivity implements ProfileClickListe
         intent.putExtra("company_bs", company_bs);
         startActivity(intent);
     }
+
 
 }
